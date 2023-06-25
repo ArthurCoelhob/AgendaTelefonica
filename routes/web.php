@@ -15,4 +15,5 @@ use App\Http\Controllers\ContatoController;
 */
 Route::resource('/contatos', ContatoController::class);
 Route::get('/search', [ ContatoController::class, 'search'])->name('contatos.search');
+Route::get('/log', [ ContatoController::class, 'log'])->name('contatos.log');
 

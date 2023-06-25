@@ -31,6 +31,9 @@
                 <form action="{{ route('contatos.create') }}">
                     <button type="submit" class="btn btn-success  me-md-2 mr-2">Criar contato</button>
                 </form>
+                <form action="{{ route('contatos.log') }}">
+                    <button type="submit" class="btn btn-danger  me-md-2 mr-2">Log excluidos</button>
+                </form>
             </div>   
           </form>
         @if ($message = Session::get('success'))

@@ -108,8 +108,39 @@ class ContatoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {      
+    {           
+        $contato = Contato::getContato($id);
+        $this->gravarTxt($contato);
         $contato = Contato::deleteContato($id);
         return redirect()->route('contatos.index')->with('success','Contato foi excluido');
     }
+
+    public function gravarTxt($contato)
+    {
+        $data = date("d/m/Y H:i");
+        $texto =  'Contato '. $contato->nome .' com o numero '. $contato->numero. ' foi excluido as '.   $data .  "<br>";
+        $texto . '<br>';
+        $arquivo = "log.txt";
+        $fp = fopen($arquivo, "a+");
+
+        fwrite($fp, $texto);
+        fclose($fp);
+        return;
+    }
+
+
+    public function log()
+    {
+
+        $arquivo = "log.txt";
+        
+        $fp = fopen($arquivo, "r");
+        
+        while (!feof ($fp)) {
+            $valor = fgets($fp, 4096);
+            return $valor . "<br>";
+        }
+        fclose($fp);
+    }
+
 }
